@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-color: #0d0d0d;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: var(--background-color);
+  overflow-x: hidden;
+}
+
+/* Animated background wave */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-animated {
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+/* Animated blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(100px);
+  z-index: 0;
+}
+
+.blob1 {
+  width: 500px;
+  height: 500px;
+  background: #7f5af0;
+  top: -150px;
+  left: -150px;
+  animation: float1 20s ease-in-out infinite;
+}
+
+.blob2 {
+  width: 400px;
+  height: 400px;
+  background: #ff6ac1;
+  bottom: -150px;
+  right: -150px;
+  animation: float2 18s ease-in-out infinite reverse;
+}
+
+@keyframes float1 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-40px) translateX(30px);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(30px) translateX(-20px);
+  }
+}
+/* Clerk Auth Form Customization */
+.clerk-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  backdrop-filter: blur(10px);
+}
+
+.clerk-sign-in,
+.clerk-sign-up {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.clerk-input {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+}
+
+.clerk-button {
+  background: #ffffff20;
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  transition: 0.3s ease;
+  border: 1px solid #fff;
+}
+.clerk-button:hover {
+  background: #ffffff40;
+  transform: scale(1.02);
+}
