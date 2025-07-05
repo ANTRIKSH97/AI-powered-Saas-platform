@@ -1,6 +1,5 @@
 export const runtime = 'nodejs';
 
-
 import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { auth } from '@clerk/nextjs/server';
@@ -21,13 +20,13 @@ export async function POST(req: NextRequest) {
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const formData = await req.formData();
-    const file = formData.get('file') as File | null;
+    const file = formData.get('file');
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
     const originalSize = formData.get('originalSize') as string;
 
-    if (!file || !title || !description) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    if (!(file instanceof Blob) || !title || !description) {
+      return NextResponse.json({ error: 'Missing or invalid fields' }, { status: 400 });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
@@ -49,7 +48,7 @@ export async function POST(req: NextRequest) {
         }
       );
 
-      Readable.from(buffer).pipe(stream); // ✅ Proper streaming
+      Readable.from(buffer).pipe(stream);
     });
 
     const newVideo = await prisma.video.create({
