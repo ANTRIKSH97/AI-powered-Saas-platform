@@ -1,3 +1,7 @@
+export const config = {
+  runtime: 'nodejs', // 👈 this forces Node runtime instead of Edge
+};
+
 import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { auth } from '@clerk/nextjs/server';
